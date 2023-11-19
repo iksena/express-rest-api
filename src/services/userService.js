@@ -54,7 +54,7 @@ class UserService {
   getPlacesFromUser(userId) {
     const user = this.getUser(userId);
 
-    return user.places.map((place) => this.placeService.getAddress(place.id));
+    return user.places.map((place) => this.placeService.getPlace(place.id));
   }
 }
 

@@ -18,7 +18,7 @@ router.post(
 );
 
 router.patch(
-  '/places',
+  '/places/:id',
   withPlaceService,
   patchPlaces,
 );

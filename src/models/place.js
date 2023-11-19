@@ -1,4 +1,5 @@
 const { v4: uuidv4 } = require('uuid');
+const NotFoundError = require('../errors/notFoundError');
 
 let placesData = [];
 
@@ -31,7 +32,7 @@ class Place {
     const foundPlace = this.getPlaceById(placeId);
 
     if (!foundPlace) {
-      throw new Error('Place is not found');
+      throw new NotFoundError('Place is not found');
     }
 
     placesData = placesData.filter((place) => place.id !== placeId);
@@ -45,7 +46,4 @@ class Place {
   }
 }
 
-module.exports = {
-  Place,
-  placesData,
-};
+module.exports = Place;

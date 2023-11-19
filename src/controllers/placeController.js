@@ -11,9 +11,10 @@ exports.getPlaces = (req, res, next) => {
 
 exports.postPlaces = (req, res, next) => {
   const { placeService } = req.app;
+  const payload = req.body;
 
   try {
-    const place = placeService.createPlace(req.body);
+    const place = placeService.createPlace(payload);
 
     res.status(201).send(place);
   } catch (error) {
@@ -23,7 +24,8 @@ exports.postPlaces = (req, res, next) => {
 
 exports.patchPlaces = (req, res, next) => {
   const { placeService } = req.app;
-  const { id, ...payload } = req.body;
+  const { id } = req.params;
+  const payload = req.body;
 
   try {
     const place = placeService.updatePlace(id, payload);

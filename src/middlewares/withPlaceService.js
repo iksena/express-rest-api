@@ -1,5 +1,5 @@
 const PlaceService = require('../services/placeService');
-const { Place } = require('../models/place');
+const Place = require('../models/place');
 
 module.exports = (req, res, next) => {
   const placeModel = new Place();
