@@ -20,3 +20,16 @@ exports.postPlaces = (req, res, next) => {
     next(error);
   }
 };
+
+exports.patchPlaces = (req, res, next) => {
+  const { placeService } = req.app;
+  const { id, ...payload } = req.body;
+
+  try {
+    const place = placeService.updatePlace(id, payload);
+
+    res.status(200).send(place);
+  } catch (error) {
+    next(error);
+  }
+};

@@ -6,12 +6,15 @@ class Place {
   createPlace(payload) {
     const { name, address, city } = payload;
 
-    placesData.push({
+    const place = {
       id: uuidv4(),
       name,
       address,
       city,
-    });
+    };
+    placesData.push(place);
+
+    return place;
   }
 
   getAllPlaces() {
@@ -24,7 +27,7 @@ class Place {
     return foundPlace;
   }
 
-  updatePlace(placeId, payload) {
+  updatePlaceById(placeId, payload) {
     const foundPlace = this.getPlaceById(placeId);
 
     if (!foundPlace) {
@@ -32,10 +35,13 @@ class Place {
     }
 
     placesData = placesData.filter((place) => place.id !== placeId);
-    placesData.push({
+    const updatedPlace = {
       ...foundPlace,
       ...payload,
-    });
+    };
+    placesData.push(updatedPlace);
+
+    return placesData;
   }
 }
 
