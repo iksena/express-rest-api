@@ -1,11 +1,15 @@
 class BaseError extends Error {
-  constructor(message = 'An error occurred', code = 'GENERAL_ERROR', statusCode = 500, data = {}) {
+  code = 'GENERAL_ERROR';
+  description = 'An error occurred';
+  statusCode = 500;
+  data = {};
+
+  constructor(message, code, statusCode, data) {
     super(message);
     this.code = code;
     this.description = message;
     this.statusCode = statusCode;
     this.data = data;
-    this.serviceError = true;
   }
 }
 

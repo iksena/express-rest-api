@@ -1,7 +1,14 @@
 const { v4: uuidv4 } = require('uuid');
 const NotFoundError = require('../errors/notFoundError');
 
-let placesData = [];
+let placesData = [
+  {
+    id: '1',
+    name: 'Home Address',
+    address: 'Jl. Rasuna Said No. 11',
+    city: 'South Jakarta',
+  },
+];
 
 class Place {
   createPlace(payload) {
