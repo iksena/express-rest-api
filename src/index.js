@@ -3,6 +3,7 @@ const bodyparser = require('body-parser');
 
 const routes = require('./routes');
 const errorMiddleware = require('./middlewares/errorMiddleware');
+const notFoundMiddleware = require('./middlewares/notFoundMiddleware');
 
 const app = express();
 const port = 3000;
@@ -14,6 +15,7 @@ if (routes && routes.length) {
 }
 
 app.use(errorMiddleware);
+app.use(notFoundMiddleware);
 
 app.listen(port, () => {
   console.log(`Express app listening on port ${port}`);
