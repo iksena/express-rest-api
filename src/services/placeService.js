@@ -1,3 +1,5 @@
+const NotFoundError = require('../errors/notFoundError');
+
 class PlaceService {
   placeModel;
 
@@ -38,6 +40,11 @@ class PlaceService {
   }
 
   deletePlace(placeId) {
+    const place = this.getPlace(placeId);
+    if (!place) {
+      throw new NotFoundError('Place is not found!');
+    }
+
     this.placeModel.deletePlace(placeId);
   }
 }

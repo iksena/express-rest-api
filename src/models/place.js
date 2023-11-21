@@ -51,6 +51,10 @@ class Place {
 
     return placesData;
   }
+
+  deletePlace(placeId) {
+    placesData = placesData.filter((place) => place.id !== placeId);
+  }
 }
 
 module.exports = Place;

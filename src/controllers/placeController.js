@@ -35,3 +35,16 @@ exports.patchPlaces = (req, res, next) => {
     next(error);
   }
 };
+
+exports.deletePlace = (req, res, next) => {
+  const { placeService } = req.app;
+  const { id } = req.params;
+
+  try {
+    placeService.deletePlace(id);
+
+    res.sendStatus(204);
+  } catch (error) {
+    next(error);
+  }
+};
