@@ -1,17 +1,27 @@
 const { v4: uuidv4 } = require('uuid');
 
-let usersData = [];
+let usersData = [
+  {
+    id: '1',
+    name: 'Sena',
+    email: 'iksena@aol.com',
+    password: 'P@ssw0rd123',
+    places: ['1'],
+  },
+];
 
 class User {
   createUser(payload) {
-    const { name, email, password, places } = payload;
+    const {
+      name, email, password, places,
+    } = payload;
 
     const user = {
       id: uuidv4(),
       name,
       email,
       password,
-      places
+      places,
     };
     usersData.push(user);
 

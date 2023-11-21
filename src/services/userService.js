@@ -1,3 +1,5 @@
+const NotFoundError = require('../errors/notFoundError');
+
 class UserService {
   userModel;
 
@@ -39,7 +41,7 @@ class UserService {
     const user = this.userModel.getUserById(userId);
 
     if (!user) {
-      throw new Error('User is not found');
+      throw new NotFoundError('User is not found');
     }
 
     return user;
@@ -51,10 +53,11 @@ class UserService {
     return users;
   }
 
-  getPlacesFromUser(userId) {
+  getPlacesByUserId(userId) {
     const user = this.getUser(userId);
+    const places = user.places ?? [];
 
-    return user.places.map((place) => this.placeService.getPlace(place.id));
+    return places.map((placeId) => this.placeService.getPlace(placeId));
   }
 }
 
