@@ -1,3 +1,4 @@
+const BaseError = require('../errors/baseError');
 const NotFoundError = require('../errors/notFoundError');
 
 class UserService {
@@ -14,6 +15,11 @@ class UserService {
       email,
       password,
     } = payload;
+
+    const user = this.userModel.getUserByEmail(email);
+    if (user) {
+      throw new BaseError('User is already registered', 'CONFLICT_USER', 409);
+    }
 
     this.userModel.createUser({
       name,
