@@ -2,21 +2,34 @@ const NotFoundError = require('../errors/notFoundError');
 
 class PlaceService {
   placeModel;
+  geocodingService;
 
-  constructor(placeModel) {
+  constructor(placeModel, geocodingService) {
     this.placeModel = placeModel;
+    this.geocodingService = geocodingService;
   }
 
-  getPlace(placeId) {
+  async getPlace(placeId) {
     const place = this.placeModel.getPlaceById(placeId);
+    const coordinate = await this.geocodingService.getCoordinate(place.address);
 
-    return place;
+    return { ...place, coordinate };
   }
 
-  getPlaces() {
+  async getPlaces() {
     const places = this.placeModel.getAllPlaces();
 
-    return places;
+    const placeList = await Promise.all(
+      places.map(
+        async (place) => {
+          const coordinate = await this.geocodingService.getCoordinate(place.address);
+
+          return { ...place, coordinate };
+        },
+      ),
+    );
+
+    return placeList;
   }
 
   updatePlace(placeId, payload) {

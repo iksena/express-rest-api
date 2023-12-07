@@ -1,7 +1,20 @@
-exports.getPlaces = (req, res, next) => {
+exports.getPlaces = async (req, res, next) => {
   const { placeService } = req.app;
   try {
-    const places = placeService.getPlaces();
+    const places = await placeService.getPlaces();
+
+    res.status(200).json(places);
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.getPlacesById = async (req, res, next) => {
+  const { placeService } = req.app;
+  const { id } = req.params;
+
+  try {
+    const places = await placeService.getPlace(id);
 
     res.status(200).json(places);
   } catch (error) {

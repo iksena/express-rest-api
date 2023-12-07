@@ -2,8 +2,9 @@ const PlaceService = require('../services/placeService');
 const Place = require('../models/place');
 
 module.exports = (req, res, next) => {
+  const { geocodingService } = req.app;
   const placeModel = new Place();
-  const placeService = new PlaceService(placeModel);
+  const placeService = new PlaceService(placeModel, geocodingService);
 
   req.app.placeService = placeService;
 

@@ -4,6 +4,7 @@ const {
   getPlacesByUserId, signUp, logIn, getUsers,
 } = require('../controllers/userController');
 const withPlaceService = require('../middlewares/withPlaceService');
+const withGeocodingService = require('../middlewares/withGeocodingService');
 const withUserService = require('../middlewares/withUserService');
 const withValidateSchema = require('../middlewares/withValidateSchema');
 const { signUpBodySchema, logInBodySchema } = require('./schemas/users');
@@ -12,6 +13,7 @@ const router = Router();
 
 router.get(
   '/users/:id/places',
+  withGeocodingService,
   withPlaceService,
   withUserService,
   getPlacesByUserId,
